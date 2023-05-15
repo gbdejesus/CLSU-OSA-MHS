@@ -1,0 +1,11 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container-fluid" id="counsellors">
+    <div class="row justify-content-center" style="border-radius: 10px;">
+        <div class="col-md-12" style="padding: 0 !important;">
+            <show-counsellors></show-counsellors>
+        </div>
+    </div>
+</div>
+@endsection

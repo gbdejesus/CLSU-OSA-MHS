@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.card-body {
+    padding: 0 !important;
+}
+
+body, html {
+    height: 100%;
+    background-color: purple;
+}
+
+* {
+    box-sizing: border-box;
+}
+
