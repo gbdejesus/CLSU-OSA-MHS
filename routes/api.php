@@ -27,6 +27,7 @@ Route::post('/management/search', 'Api\AdminManagementController@search');
 Route::post('/management/save', 'Api\AdminManagementController@save');
 Route::post('/management/upload', 'Api\AdminManagementController@upload');
 Route::get('/management/show/{id}', 'Api\AdminManagementController@show');
+Route::post('/management/delete/{id}', 'Api\AdminManagementController@delete');
 
 Route::get('/items', 'Api\EvaluationController@getEvaluationItems');
 Route::post('/save', 'Api\EvaluationController@save');

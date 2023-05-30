@@ -34,4 +34,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/user', 'Admin\UserController@index');
     Route::get('/colleges', 'Admin\CollegesController@index');
     Route::get('/faqs', 'Admin\FAQController@index');
+    Route::get('/counsellor', 'Admin\CounsellorController@index');
+    Route::get('/student', 'Admin\StudentController@index');
+    Route::get('/admins', 'Admin\AdminsController@index');
+
+
+    Route::get('/client', 'Admin\UserController@clientIndex');
 });

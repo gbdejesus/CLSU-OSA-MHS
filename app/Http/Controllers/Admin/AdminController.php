@@ -16,8 +16,5 @@ class AdminController extends BaseController
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $admin_nav = config('nav.admin');
-        View::share('admin_nav', $admin_nav);
     }
 }

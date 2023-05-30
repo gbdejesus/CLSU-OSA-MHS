@@ -46,6 +46,7 @@
                                 :audio="false"
                                 :current-user-id="user.id"
                                 :rooms-loaded="true"
+                                :loading-rooms="loadingRooms"
                                 :rooms="JSON.stringify(contacts)"
                                 :room-actions="JSON.stringify(roomActions)"
                                 :messages="JSON.stringify(messages)"
@@ -253,10 +254,11 @@
                 },
                 messagesLoaded: false,
                 showEvaluationModal: false,
+                loadingRooms: true,
                 roomActions: [
-                    { name: 'inviteUser', title: 'Invite User' },
-                    { name: 'removeUser', title: 'Remove User' },
-                    { name: 'deleteRoom', title: 'Delete Room' }
+                    // { name: 'inviteUser', title: 'Invite User' },
+                    // { name: 'removeUser', title: 'Remove User' },
+                    // { name: 'deleteRoom', title: 'Delete Room' }
                 ],
                 menuActions: [
                     { name: 'checkEvaluationScore', title: 'Check Evaluation' },
@@ -291,7 +293,8 @@
                     success: false,
                     message: ''
                 },
-                showResendApiNotif: false
+                showResendApiNotif: false,
+                testBool: true,
             }
          },
         props:{
@@ -317,6 +320,8 @@
             .catch( error => {
                 console.log( error );
             })
+
+            setTimeout(() => this.loadingRooms = false, 1000);
         },
         computed: {
             censoredEmail: function(){
@@ -404,9 +409,21 @@
                     console.log( error );
                 })
             },
+
+            updateContacts: function () {
+                axios.get('/api/contact-list/'+ this.user.id)
+                    .then( response => {
+                        this.contacts = response.data;
+                        this.messagesLoaded = true;
+                    })
+                    .catch( error => {
+                        console.log( error );
+                    })
+            },
+
             saveNewMessage (msg) {
 
-                if (! this.selectedContact) {
+                if (! this.selectedContact.room) {
                     return;
                 }
 
@@ -425,22 +442,39 @@
                         console.log(error);
                     })
 
+                this.updateContacts();
             },
-            handleIncoming (message){
+            handleIncoming (message) {
 
-                if( this.selectedContact.room.id && message.from == this.selectedContact.id ){
+                console.log(message)
+                if (message.to === this.selectedContact.room.id) {
                     this.saveNewMessage(message);
-                    return;
                 }
-                message._id = message.id;
-                message.senderId = message.from;
-                message.content = message.text;
-                var date = new Date(message.created_at);
-                date.setSeconds(45); // specify value for SECONDS here
-                var timeString = date.toISOString().substring(11, 19);
-                message.timestamp = timeString;
-                this.messages.push(message);
-                this.updateUnreadCount(message.from_contact, false);
+
+                if (message.from === this.selectedContact.room.id ) {
+                    message._id = message.id;
+                    message.senderId = message.from;
+                    message.content = message.text;
+                    var date = new Date(message.created_at);
+                    date.setSeconds(45); // specify value for SECONDS here
+                    var timeString = date.toISOString().substring(11, 19);
+                    message.timestamp = timeString;
+                    this.messages.push(message);
+                    this.updateUnreadCount(message.from_contact, false);
+                }
+
+                // message._id = message.id;
+                // message.senderId = message.from;
+                // message.content = message.text;
+                // var date = new Date(message.created_at);
+                // date.setSeconds(45); // specify value for SECONDS here
+                // var timeString = date.toISOString().substring(11, 19);
+                // message.timestamp = timeString;
+                // this.messages.push(message);
+                // this.updateUnreadCount(message.from_contact, false);
+
+                this.updateContacts();
+
             },
             updateUnreadCount (contact, reset) {
                 this.contacts == this.contacts.map((single) => {
@@ -456,6 +490,8 @@
                     return single;
 
                 })
+
+                this.updateContacts();
             },
             menuActionHandler ({ roomId, action }) {
                 console.log(action.name)
@@ -564,8 +600,8 @@
         font-size: 24px;
     }
     .two-fa-form {
-        margin-left: 500px;
-        margin-right: 500px;
+        margin-left: 200px;
+        margin-right: 200px;
     }
     @media screen and (max-width: 1080px) {
         .two-fa-form {

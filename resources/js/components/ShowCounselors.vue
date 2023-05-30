@@ -7,13 +7,13 @@
                 </div>
             </div>
             <div class="row justify-content-center" v-if="!loading">
-                <div class="col-12 col-sm-8 col-lg-6">
+                <div class="col-12 col-sm-8 col-lg-6" style="font-family: 'General Sans', sans-serif;">
                     <!-- Section Heading-->
                     <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <h3>CLSU Mental Health Providers</h3>
+                        <h2>CLSU Mental Health Providers</h2>
                         <p style="font-size: 16px;">The Guidance Services Unit of OSA is providing online and telecounseling services for all CLSU students.
-                            Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
-                            For more information, follow the official Facebook page of OSA.</p>
+                            Counselors and mental health professionals can be reached by students through this website.<br><br></p>
+                        <div class="line"></div>
                         <div class="line"></div>
                     </div>
                 </div>

@@ -1,14 +1,14 @@
 @section('top-navbar')
-<nav class="navbar navbar-default" style="background-color: black;">
+<nav class="navbar navbar-default" style="background-color: #003a10;">
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
 
-            <form class="navbar-form navbar-left navbar-search-form" role="search">
+            <!-- <form class="navbar-form navbar-left navbar-search-form" role="search">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     <input type="text" value="" class="form-control" placeholder="Search...">
                 </div>
-            </form>
+            </form> -->
 
             <ul class="nav navbar-nav navbar-right">
 

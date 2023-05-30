@@ -64,6 +64,27 @@ return [
             ],
             'icon' => 'ti-user'
         ],
+        'admins' => [
+            'name' => 'Admin Management',
+            'actions' => [
+                'view' => 'admin/admins',
+            ],
+            'icon' => 'ti-user'
+        ],
+        'counsellor' => [
+            'name' => 'Counsellor Management',
+            'actions' => [
+                'view' => 'admin/counsellor',
+            ],
+            'icon' => 'ti-user'
+        ],
+        'student' => [
+            'name' => 'Student Management',
+            'actions' => [
+                'view' => 'admin/student',
+            ],
+            'icon' => 'ti-user'
+        ],
     ],
 
 ];

@@ -10,10 +10,13 @@
                 <div class="col-12 col-sm-8 col-lg-6">
                     <!-- Section Heading-->
                     <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                        <h3>CLSU Mental Health Providers</h3>
-                        <p>The Guidance Services Unit of OSA is providing online and telecounseling services for all CLSU students.
+                        <br>
+                        <h2>CLSU Mental Health Providers</h2>
+                        <br>
+                        <br>
+                        <!-- <p>The Guidance Services Unit of OSA is providing online and telecounseling services for all CLSU students.
                             Counselors and mental health professionals can be reached by students through their Messenger account and mobile numbers.
-                            For more information, follow the official Facebook page of OSA.</p>
+                            For more information, follow the official Facebook page of OSA.</p> -->
                         <div class="line"></div>
                     </div>
                 </div>
@@ -28,7 +31,7 @@
                             <img :src="counselor.image" :alt="counselor.name" style="height: 200px; width: 200px;">
                         </div>
                         <!-- Team Details-->
-                        <div class="single_advisor_details_info">
+                        <div class="single_advisor_details_info" >
                             <h6> {{ counselor.name }} </h6>
                             <p class="designation"> {{ counselor.email }} </p>
                             <p class="designation"> {{ counselor.college }} </p>

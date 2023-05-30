@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AdminManagementController extends Controller
 {
@@ -19,7 +21,7 @@ class AdminManagementController extends Controller
     {
         $params = array_filter($request->all());
 
-        $profile = User::select('*');
+        $profile = User::select('*')->orderBy('id', 'DESC');
 
         if (isset($request->name)) {
             $profile->where('name', 'like', '%'.$request->name.'%');
@@ -66,55 +68,93 @@ class AdminManagementController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return array|JsonResponse
      */
     public function save(Request $request)
     {
-        $duplicate = User::where('email', $request->email)->get();
-        $successMessage = 'Profile has been successfully created!';
-        $profile = new User();
+        $rules = [
+            'name' => 'required|max:25',
+            'email' => 'required|email|unique:users',
+            'role' => 'in:CLIENT,COUNSELOR,ADMIN',
+        ];
+
         if (isset($request->id)) {
-            $successMessage = 'Profile has been successfully updated!';
-            $profile = User::findOrFail($request->id);
-            foreach ($duplicate as $dup) {
-                if ($dup->id !== $request->id) {
+            $rules['email'] = "required|email|unique:users,email,$request->id";
+        }
+
+        if ($request['mode'] === 'create') {
+            $rules['password'] = 'required|min:6';
+        }
+
+        switch ($request['role']) {
+            case 'CLIENT':
+                $rules['college'] = 'required';
+                $rules['student_id'] = 'required';
+                $rules['course'] = 'required';
+                $rules['year_level'] = 'required';
+                $rules['section'] = 'required';
+                break;
+            case 'COUNSELOR':
+                $rules['college'] = 'required';
+                break;
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
+        $response = [];
+        if ($validator->fails()) {
+            $response['success'] = false;
+            $response['message'] = $validator->errors()->all();
+            return $response;
+        } else {
+            $duplicate = User::where('email', $request->email)->get();
+            $successMessage = 'Profile has been successfully created!';
+            $profile = new User();
+            if (isset($request->id)) {
+                $successMessage = 'Profile has been successfully updated!';
+                $profile = User::findOrFail($request->id);
+                foreach ($duplicate as $dup) {
+                    if ($dup->id !== $request->id) {
+                        return response()->json(['success' => false, 'message' => 'Email is already existed.']);
+                    }
+                }
+            } else {
+                if (count($duplicate) >= 1) {
                     return response()->json(['success' => false, 'message' => 'Email is already existed.']);
                 }
             }
-        } else {
-            if (count($duplicate) >= 1) {
-                return response()->json(['success' => false, 'message' => 'Email is already existed.']);
+
+            $profile->name = $request->name;
+            $profile->email = $request->email;
+            $profile->password = Hash::make($request->password);
+            $profile->phone = $request->phone;
+            $profile->role = $request->role;
+            $profile->college = $request->college;
+            $profile->student_id = $request->student_id;
+            $profile->course = $request->course;
+            $profile->year_level = $request->year_level;
+            $profile->section = $request->section;
+            $profile->profile_image = $request->profile_image;
+            $profile->evaluated = $request->role === 'COUNSELOR' ? 0 : 1;
+            $profile->evaluation_score = null;
+            $profile->save();
+
+            if ($profile) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => $successMessage,
+                        'response' => $profile
+                    ]);
+            } else {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Something went wrong.. Please try again later!'
+                    ]
+                );
             }
         }
-
-        $profile->name = $request->name;
-        $profile->email = $request->email;
-        $profile->phone = $request->phone;
-        $profile->role = $request->role;
-        $profile->college = $request->college;
-        $profile->student_id = $request->student_id;
-        $profile->course = $request->course;
-        $profile->year_level = $request->year_level;
-        $profile->section = $request->section;
-        $profile->profile_image = $request->profile_image;
-        $profile->evaluated = $request->role === 'COUNSELOR' ? 0 : 1;
-        $profile->evaluation_score = null;
-        $profile->save();
-
-        if ($profile)
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => $successMessage,
-                    'response' => $profile
-                ]);
-        else
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => 'Something went wrong.. Please try again later!'
-                ]
-            );
     }
 
     public function upload(Request $request)
@@ -134,5 +174,20 @@ class AdminManagementController extends Controller
         $image->save();
 
         return response()->json(['success' => true, 'message' => 'Image uploaded successfully!','response' => $image]);
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function delete($id): JsonResponse
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        Session::flash('flash_title', 'Success');
+        Session::flash('flash_message', 'User has been deleted Successfully!');
+
+        return response()->json(['success' => true, 'message' => 'User has been deleted Successfully!','response' => $user]);
     }
 }

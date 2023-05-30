@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends AdminController
+class StudentController extends AdminController
 {
     public function __construct()
     {
@@ -25,7 +25,7 @@ class UserController extends AdminController
     public function index()
     {
         $users = User::orderBy('id', 'DESC')->get();
-        return view('admin.user')->with('users', $users);
+        return view('admin.student')->with('users', $users);
     }
 
     /**

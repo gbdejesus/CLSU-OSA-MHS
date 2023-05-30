@@ -368,28 +368,33 @@
                     <!-- START MAIN CONTENT AREA -->
                     <tr>
                         <td class="wrapper">
-                            <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                            <table role="presentation" border="0" cellpadding="50" cellspacing="50">
                                 <tr>
-                                    <td>
-                                        <p>
-                                            Hi {{ $name }}, <br>
+                                    <td style="background-color: #d1e7dd; color: #0f5132; margin-left: 40px; margin-right: 40px;">
+                                    <center><img src="{{ $message->embed('images/clsu-logo.jpg') }}" style="max-height: 150px;"></center>
+                                    <br><br>
+                                    <p style="color: #0f5132;">
+                                            Hi <b style="font-weight: bold;">{{ $name }}</b>, <br>
                                             Here is your authentication code: <br>
                                         </p>
 
-                                        <p>
+                                        <p style="text-align: center; font-size: 30px; font-weight:bold;">
                                             {{ $code }}
                                         </p>
 
-                                        <p>This code expires in 20 minutes, but you can generate another by logging in
+                                        <p style="color: #0f5132;">This code expires in 20 minutes, but you can generate another by logging in
                                             again.</p>
 
-                                        <p>Good luck! Hope it works.</p>
-                                        <p>
+                                        <p style="color: #0f5132;">Good luck! Hope it works.</p>
+                                        
+                                        <br>
+                                        <br>
+                                        <p style="color: #0f5132;">
                                             Regards,<br>
-                                            CLSU-OSA: MENTAL HEALTH SUPPORT
-                                        </p>
+                                            <b style="font-weight: bolder; color: #0f5132; font-size:20px;">CLSU-OSA: MENTAL HEALTH SUPPORT</b>
+                                        </p style="color: #0f5132;">
 
-                                        <i>This email is send automatically when you log into your account. Please don't
+                                        <i style="color: #0f5132;">This email is send automatically when you log into your account. Please don't
                                             reply.</i>
                                     </td>
                                 </tr>

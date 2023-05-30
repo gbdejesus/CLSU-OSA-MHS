@@ -489,8 +489,9 @@ progress {
 }
 
 .lead {
-  font-size: 1.25rem;
+  font-size: 15px;
   font-weight: 300;
+  font-family: 'General Sans', sans-serif;
 }
 
 .display-1 {
@@ -7809,13 +7810,19 @@ textarea.form-control-lg {
 .bg-primary {
   --bs-bg-opacity: 1;
   /*background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;*/
-  background-color: #c5c6d0 !important;
+  background-color: #78c224 !important;
 }
 
 .bg-secondary {
   --bs-bg-opacity: 1;
   /*background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;*/
   background-color: #003a10 !important;
+}
+
+.bg-faq {
+  --bs-bg-opacity: 1;
+  /*background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;*/
+  background-color: #f5f5dd !important;
 }
 
 .bg-success {
@@ -11500,8 +11507,8 @@ html {
 }
 
 .footer {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 3rem;
   background-color: #003a10;
   color: #fff;
 }

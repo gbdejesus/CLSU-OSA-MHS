@@ -1,46 +1,62 @@
 <template>
     <div>
-        this is admin dashboard
+        <div class="row">
+            <div class="col-md-6">
+                <h3>CLIENTS</h3>
+                <table class="table table-hover" style="table-layout: auto;">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="font-weight: bolder;"></th>
+                        <th scope="col" style="font-weight: bolder;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="client in clients">
+                        <td style="vertical-align: middle; text-transform: capitalize;">
+                            {{ client.college }}
+                        </td>
+                        <td style="vertical-align: middle;"> {{ client.total }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+
+                <h3>COUNSELORS</h3>
+                <table class="table table-hover" style="table-layout: auto;">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="font-weight: bolder;"></th>
+                        <th scope="col" style="font-weight: bolder;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="counselor in counselors">
+                        <td style="vertical-align: middle; text-transform: capitalize;">
+                            {{ counselor.college }}
+                        </td>
+                        <td style="vertical-align: middle;"> {{ counselor.total }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
 
 export default {
+    props: {},
     components: {},
-
     data: function () {
         return {
-            counselors: [],
-            evaluations: [],
-            apiResponse: {
-                data: null,
-                success: false,
-                show: false
-            },
-            loading: true,
-            selectedCounselor: {
-                name: ''
-            },
-
+            clients: clientsCount,
+            counselors: counselorsCount
         }
     },
-    mounted() {
-        this.token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        this.getCounselors();
-    },
-    methods: {
-        getCounselors: function () {
-            axios.get('/api/counselors')
-                .then(response => {
-                    this.counselors = response.data;
-                    this.loading = false;
-                })
-                .catch(error => {
-                    console.log(error);
-                })
-        },
-    }
+    mounted () {},
+    methods: {}
 
 
 }
@@ -102,6 +118,6 @@ details[open] div {
     padding: .5em 1em;
 }
 .faq-details {
-    font-size: 16px;
+    font-size: 40px;
 }
 </style>

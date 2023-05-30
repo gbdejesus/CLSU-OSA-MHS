@@ -15,7 +15,7 @@
 
         <form class="text-center border border-light p-5" role="form">
 
-            <p class="h4 mb-4">Sign in </p>
+            <p class="h4 mb-4">Sign in</p>
             <!-- Email -->
             <input type="email" id="email" class="form-control mb-4" v-model="email" placeholder="E-mail">
 

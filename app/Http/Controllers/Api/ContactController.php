@@ -37,15 +37,23 @@ class ContactController extends Controller
             ->groupBy('from')
             ->get();
 
-        $contacts = $contacts->map(function ($contact) use ($contacts, $unreadIds) {
+        $contacts = $contacts->map(function ($contact) use ($contacts, $unreadIds, $user) {
 
             // just to compatible to plugin <vue-advanced-chat>
             $contactUnread = $unreadIds->where('sender_id', $contact->id)->first();
-            $contact->unread = $contactUnread ? $contactUnread->messages_count : 0;
+            $contact->unreadCount = $contactUnread ? $contactUnread->messages_count : 0;
             $contact->roomId = $contact->id;
             $contact->roomName = $contact->name;
             $contact->evaluation_details = json_decode($contact->evaluation_details);
             $contact->avatar = $contact->profile_image ?? $this->getUserImage($contact->id);
+            $lastMessage = $this->getLastMessage($contact->id, $user->id);
+            $contact->lastMessageTime = false;
+            if ($lastMessage) {
+                $contact->lastMessage = $this->formatMessage($lastMessage->toArray(), $contact->name);
+                $contact->lastMessageTime = $lastMessage->created_at;
+            }
+
+            $contact->index = $contact->lastMessageTime;
 
             $users = [];
             if ($contact->role === 'COUNSELOR') {
@@ -62,6 +70,27 @@ class ContactController extends Controller
         });
 
         return response()->json($contacts);
+    }
+
+    public function getLastMessage($from, $to)
+    {
+        return Message::where('from', $from)->where('to', $to)->latest()->first();
+    }
+
+    public function formatMessage($message, $username)
+    {
+        $msg = [];
+        $msg['_id'] = $message['id'];
+        $msg['content'] = $message['text'];
+        $msg['senderId'] = $message['from'];
+//        $msg['username'] = $username;
+        $msg['timestamp'] = date('h:i:s a', strtotime($message['created_at']));
+        $msg['saved'] = true;
+        $msg['distributed'] = false;
+        $msg['seen'] = $message['read'];
+        $msg['new'] = 1;
+
+        return (object) $msg;
     }
 
     /**
@@ -98,9 +127,10 @@ class ContactController extends Controller
                 $msg->_id = $msg->id;
                 $msg->content = $msg->text;
                 $msg->senderId = (string) $msg->from;
-                $msg->timestamp = $msg->created_at->format('H:i:s');
+                $msg->timestamp = $msg->created_at->format('h:i:s A');
                 $msg->username = $sender->name;
                 $msg->avatar = $sender->profile_image;
+                $msg->seen = $msg->read;
                 if ($msg->from == $auth_id) {
                     $msg->username = $receiver->name;
                     $msg->avatar = $receiver->profile_image ?? $this->getUserImage($receiver->id);
@@ -118,22 +148,22 @@ class ContactController extends Controller
         $message = Message::create([
             'from' => $request->sender_id,
             'to' => $request->receiver_id,
-            'text' => $request->text['content'],
+            'text' => $request->text['content'] ?? $request->text['text'],
             'senderId' => $request->sender_id,
-            'content' => $request->text['content'],
+            'content' => $request->text['content'] ?? $request->text['text'],
         ]);
 
         // just to compatible to plugin <vue-advanced-chat>
         $message->_id = $message->id;
         $message->content = $message->text;
         $message->senderId = $message->from;
-        $message->timestamp = $message->created_at->format('H:i:s');
+        $message->timestamp = $message->created_at->format('H:i:s A');
 
         $toBroadcast = $message;
         $toBroadcast->_id = $message->id;
         $toBroadcast->content = $message->text;
         $toBroadcast->senderId = (string) $message->from;
-        $toBroadcast->timestamp = $message->created_at->format('H:i:s');
+        $toBroadcast->timestamp = $message->created_at->format('H:i:s A');
 
         broadcast(new NewMessage($message));
         return response()->json($toBroadcast);

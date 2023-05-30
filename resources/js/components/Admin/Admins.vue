@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 style="margin-left: 0.3em;">Users Management</h2>
+        <h2 style="margin-left: 0.3em;">Admin Management</h2>
         <br>
         <br>
         <div class="card-body" v-if="isSearch">
@@ -16,7 +16,7 @@
                                v-model="searchData.email">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <!-- <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control" v-model="searchData.role">
                             <option value="" selected disabled>Select Role</option>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-2 pull-right">
                     <button type="button" class="btn btn-outline-primary btn-block" @click="newUser()">Add User</button>
-                </div>
+                </div> -->
                 <div class="col-md-2 pull-right">
                     <button type="button" class="btn btn-outline-info btn-block" @click="search()">Search</button>
                 </div>
@@ -168,7 +168,7 @@
             <div class="row mb-4">
                 <div class="col-md-6 mb-2">
                     <img class="twoByTwoPic float-right" :src="profile.image" alt="no saved image"
-                         style="max-height: 200px; max-width: 200px; margin-bottom: 10px; border-radius: 50%; clip-path: circle();"
+                         style="max-height: 200px; max-width: 200px; margin-bottom: 10px; border-radius: 50%;"
                          v-if="hasPicture">
                     <div class="form-group">
                         <label for="name">Image: </label>
@@ -234,7 +234,6 @@
                         <label for="college">College: </label>
                         <div class="select">
                             <select class="form-control form-select" id="college" v-model="profile.college">
-                                <option value="" selected disabled>SELECT COLLEGE</option>
                                 <option value="UNIVERSITY SCIENCE HIGH SCHOOL">UNIVERSITY SCIENCE HIGH SCHOOL</option>
                                 <option value="AGRICULTURAL SCIENCE AND TECHNOLOGY SCHOOL">AGRICULTURAL SCIENCE AND TECHNOLOGY SCHOOL</option>
                                 <option value="COLLEGE OF AGRICULTURE">COLLEGE OF AGRICULTURE</option>
@@ -246,7 +245,6 @@
                                 <option value="COLLEGE OF HOME SCIENCE AND INDUSTRY">COLLEGE OF HOME SCIENCE AND INDUSTRY</option>
                                 <option value="COLLEGE OF VETERINARY SCIENCE AND MEDICINE">COLLEGE OF VETERINARY SCIENCE AND MEDICINE</option>
                                 <option value="COLLEGE OF SCIENCE">COLLEGE OF SCIENCE</option>
-                                <option value="GRADUATE STUDIES">GRADUATE STUDIES</option>
                             </select>
                             <span class="focus"></span>
                         </div>
@@ -269,15 +267,7 @@
                 <div class="col-md-3 mb-2">
                     <div class="form-group">
                         <label for="year-level">Year Level: </label>
-                        <select class="form-control form-select" id="year-level" v-model="profile.year_level">
-                            <option value="" selected disabled>SELECT YEAR</option>
-                            <option value="1st">1st</option>
-                            <option value="2nd">2nd</option>
-                            <option value="3rd">3rd</option>
-                            <option value="4th">4th</option>
-                            <option value="5th">5th</option>
-                            <option value="6th">6th</option>
-                        </select>
+                        <input class="form-control" id="year-level" type="text" v-model="profile.year_level">
                     </div>
                 </div>
                 <div class="col-md-3 mb-2">
@@ -321,7 +311,7 @@ export default {
             searchData: {
                 name: '',
                 email: '',
-                role: ''
+                role: 'ADMIN'
             },
             results: [],
             profile: {

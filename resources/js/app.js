@@ -25,8 +25,9 @@ import FaqPage from './components/FAQ.vue'
 
 import Dashboard from './components/admin/Dashboard.vue'
 import User from './components/admin/User.vue'
-import Colleges from './components/admin/Colleges.vue'
-import Faq from './components/admin/FAQ.vue'
+import Counsellor from './components/admin/Counsellor.vue'
+import Student from './components/admin/Student.vue'
+import Admins from './components/admin/Admins.vue'
 
 const app = new Vue({
     el: '#app',
@@ -54,7 +55,8 @@ const admin = new Vue({
     components:{
         Dashboard,
         User,
-        Colleges,
-        Faq,
+        Counsellor,
+        Admins,
+        Student,
     },
 });
