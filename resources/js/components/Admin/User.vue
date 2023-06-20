@@ -85,7 +85,7 @@
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-outline-danger mr-2" data-toggle="modal"
                                         data-target="#confirm-delete" @click="toDelete = result, prepareToDelete()">
-                                        <i class="glyphicon fa fa-trash"></i>
+                                        <i class="glyphicon fa fa-archive"></i>
                                     </button>
                                 </div>
                             </div>

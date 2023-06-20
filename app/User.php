@@ -39,6 +39,7 @@ class User extends Authenticatable
         'clients',
         'counselors',
         'evaluated',
+        'deleted_at',
         'two_fa_code',
         'two_fa_expiry',
         'two_fa_verified',

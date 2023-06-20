@@ -89,7 +89,7 @@ class AdminManagementController extends Controller
         switch ($request['role']) {
             case 'CLIENT':
                 $rules['college'] = 'required';
-                $rules['student_id'] = 'required';
+                $rules['student_id'] = 'required|unique:users';
                 $rules['course'] = 'required';
                 $rules['year_level'] = 'required';
                 $rules['section'] = 'required';
@@ -126,7 +126,9 @@ class AdminManagementController extends Controller
 
             $profile->name = $request->name;
             $profile->email = $request->email;
-            $profile->password = Hash::make($request->password);
+            if ($request['mode'] === 'create') {
+                $profile->password = Hash::make($request->password);
+            }
             $profile->phone = $request->phone;
             $profile->role = $request->role;
             $profile->college = $request->college;
@@ -186,8 +188,8 @@ class AdminManagementController extends Controller
         $user->delete();
 
         Session::flash('flash_title', 'Success');
-        Session::flash('flash_message', 'User has been deleted Successfully!');
+        Session::flash('flash_message', 'User has been archived Successfully!');
 
-        return response()->json(['success' => true, 'message' => 'User has been deleted Successfully!','response' => $user]);
+        return response()->json(['success' => true, 'message' => 'User has been archived Successfully!','response' => $user]);
     }
 }

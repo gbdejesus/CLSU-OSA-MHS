@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Image;
 use App\Providers\RouteServiceProvider;
 use App\User;
@@ -54,16 +55,25 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'name' => 'required|max:25',
+            'name' => 'required|max:35|unique:users',
             'email' => ['required', 'max:255', 'email', 'regex:/(.*)@(clsu2.edu)\.ph/i', 'unique:users'],
             'role' => 'in:CLIENT,COUNSELOR,ADMIN',
-            'student_id' => 'required',
+            'phone' => 'required|max:11',
+            'student_id' => ['required', 'unique:users'],
             'course' => 'required',
             'year_level' => 'required',
             'section' => 'required',
         ]);
     }
-
+    // public function register(Request $request)
+    // {
+    //     // Validate the form data
+    //     $validatedData = $request->validate([
+    //         'college' => 'required',
+    //         'course' => 'required',
+    //         // Include other form field validations
+    //     ]);
+    // }
     /**
      * @param array $data
      * @return mixed
@@ -103,6 +113,12 @@ class RegisterController extends Controller
         $this->sendTwoFactorEmail($user);
 
         return $user;
+    }
+
+    public function getCoursesByCollege(Request $request, $collegeId)
+    {
+        $courses = Course::where('college_id', $collegeId)->get();
+        return response()->json($courses);
     }
 
     public function sendTwoFactorEmail($user)

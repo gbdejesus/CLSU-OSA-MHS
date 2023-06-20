@@ -6,7 +6,7 @@
                     <span v-if="(user.role !== 'ADMIN' && user.evaluated === 1) && user.clients !== null">MANAGEMENT</span>
                     <span v-else-if="user.role === 'CLIENT'">
                         <div v-if="user.evaluated === 1">
-                            <span v-if="user.counselors === null">PICK COUNSELORS</span>
+                            <span v-if="user.counselors === null">PICK YOUR COUNSELORS</span>
                             <span v-else>CONVERSATIONS</span>
                         </div>
                         <div v-else>
@@ -204,13 +204,13 @@
 <!--                        <span>Course: {{ selectedContact.room.course }} </span> <br>-->
 <!--                        <span>Year Level & Section: {{ selectedContact.room.yearLevel }} - {{ selectedContact.room.section }} </span> <br>-->
                         <div>
-                            <img :src="selectedContact.room.avatar" alt="student_picture.jpeg" style="width:100%">
-                            <h1>{{ selectedContact.room.name }}</h1>
-                            <span style="font-size: 24px; font-weight: bolder;"># {{ selectedContact.room.student_id }}</span><br>
-                            <span style="font-size: 24px; font-weight: bolder;">{{ selectedContact.room.course }}</span><br>
-                            <span style="font-size: 24px; font-weight: bolder;">{{ selectedContact.room.year_level }} - {{ selectedContact.room.section }}</span><br>
-                            <span style="font-size: 24px; font-weight: bolder;">{{ selectedContact.room.email }}</span><br>
-                            <span style="font-size: 24px; font-weight: bolder;">{{ selectedContact.room.phone }}</span><br>
+                            <img :src="selectedContact.room.avatar" alt="student_picture.jpeg" style="width:50%; clip-path: circle();"><br>
+                            <h3>{{ selectedContact.room.name }}</h3>
+                            <span style="font-size: 20px; font-weight: bolder;"># {{ selectedContact.room.student_id }}</span><br>
+                            <span style="font-size: 20px; font-weight: bolder;">{{ selectedContact.room.course }}</span>
+                            <span style="font-size: 20px; font-weight: bolder;">{{ selectedContact.room.year_level }} - {{ selectedContact.room.section }}</span><br>
+                            <span style="font-size: 20px; font-weight: bolder;">{{ selectedContact.room.email }}</span><br>
+                            <span style="font-size: 20px; font-weight: bolder;">{{ selectedContact.room.phone }}</span><br>
                         </div>
                     </div>
 
@@ -600,8 +600,8 @@
         font-size: 24px;
     }
     .two-fa-form {
-        margin-left: 200px;
-        margin-right: 200px;
+        margin-left: 300px;
+        margin-right: 300px;
     }
     @media screen and (max-width: 1080px) {
         .two-fa-form {

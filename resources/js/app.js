@@ -28,6 +28,7 @@ import User from './components/admin/User.vue'
 import Counsellor from './components/admin/Counsellor.vue'
 import Student from './components/admin/Student.vue'
 import Admins from './components/admin/Admins.vue'
+import Archive from './components/admin/Archive.vue'
 
 const app = new Vue({
     el: '#app',
@@ -58,5 +59,6 @@ const admin = new Vue({
         Counsellor,
         Admins,
         Student,
+        Archive,
     },
 });

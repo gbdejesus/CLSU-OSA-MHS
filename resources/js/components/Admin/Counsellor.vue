@@ -46,7 +46,7 @@
                         <th scope="col" style="font-weight: bolder;">Phone</th>
                         <!-- <th scope="col" style="font-weight: bolder;">Course</th>
                         <th scope="col" style="font-weight: bolder;">Year & Section</th> -->
-                        <th scope="col" style="font-weight: bolder;">Role</th>
+                        <!-- <th scope="col" style="font-weight: bolder;">Role</th> -->
                     </tr>
                     </thead>
                     <tbody>
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="vertical-align: middle; text-transform: capitalize;">
+                        <td style="vertical-align: middle;">
                             {{ result.name }}
                         </td>
                         <td style="vertical-align: middle;"> {{ result.email }}</td>
@@ -66,7 +66,7 @@
                         <td style="vertical-align: middle;"> {{ result.phone }}</td>
                         <!-- <td style="vertical-align: middle;"> {{ result.course }}</td>
                         <td style="vertical-align: middle;"> {{ result.year_level }} - {{ result.section }}</td> -->
-                        <td style="vertical-align: middle;">
+                        <!-- <td style="vertical-align: middle;">
                             <button class="btn btn-info btn-xs btn-fill" v-if="result.role === 'ADMIN'">
                                 Admin
                             </button>
@@ -76,7 +76,7 @@
                             <button class="btn btn-warning btn-xs btn-fill" v-if="result.role === 'CLIENT'">
                                 Client
                             </button>
-                        </td>
+                        </td> -->
                         <td style="vertical-align: middle;">
                             <div class="flex-center">
                                 <div class="col-md-6">
@@ -87,7 +87,7 @@
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-outline-danger mr-2" data-toggle="modal"
                                         data-target="#confirm-delete" @click="toDelete = result, prepareToDelete()">
-                                        <i class="glyphicon fa fa-trash"></i>
+                                        <i class="glyphicon fa fa-archive"></i>
                                     </button>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Confirm Delete</h4>
+                            <h4 class="modal-title">Confirm Archive</h4>
                         </div>
 
                         <!-- Modal body -->
@@ -122,15 +122,14 @@
                                 <strong>Warning!</strong> Oops, something went wrong. Please try again later.
                             </div>
                             <span v-if="!apiResponse.show">
-                                Are you sure to delete {{ toDelete.name }} ({{ toDelete.role }})?
+                                Are you sure to archive {{ toDelete.name }} ({{ toDelete.role }})?
                             </span>
                         </div>
 
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <div v-if="!apiResponse.show && !apiResponse.success">
-                                <button type="button" class="btn btn-success" @click="softDelete(toDelete.id)">Yes
-                                </button>
+                                <button type="button" class="btn btn-success" @click="softDelete(toDelete.id)">Yes</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                             </div>
                             <div v-if="apiResponse.show && apiResponse.success">

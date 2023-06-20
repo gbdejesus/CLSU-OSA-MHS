@@ -24,6 +24,10 @@
     <link href="{{asset('backend/css/font-muli.css')}}" rel='stylesheet' type='text/css'>
     <link href="{{asset('backend/css/themify-icons.css')}}" rel="stylesheet">
 </head>
+<br>
+<br>
+<br>
+
 <body id="clsu-osa-mental-health-support">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -31,7 +35,7 @@
 
         <a href="{{ url('/') }}" ><img class="mr-2" src="{{ asset('images/clsu-logo.jpg') }}" alt="..." style="max-height: 50px; margin-right: 10px;"/>
         <a class="navbar-brand" href="#clsu-osa-mental-health-support">
-            CLSU-OSA:
+            CLSU-OSA:<br>
             Mental Health Support
         </a></a>
         <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

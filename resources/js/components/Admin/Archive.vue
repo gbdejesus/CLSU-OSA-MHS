@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 style="margin-left: 0.3em;">Admin Management</h2>
+        <h2 style="margin-left: 0.3em;">Archives Management</h2>
         <br>
         <br>
         <div class="card-body" v-if="isSearch">
@@ -16,7 +16,7 @@
                                v-model="searchData.email">
                     </div>
                 </div>
-                <!-- <div class="col-md-2">
+                <div class="col-md-2">
                     <div class="form-group">
                         <select class="form-control" v-model="searchData.role">
                             <option value="" selected disabled>Select Role</option>
@@ -26,7 +26,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2 pull-right">
+                <!-- <div class="col-md-2 pull-right">
                     <button type="button" class="btn btn-outline-primary btn-block" @click="newUser()">Add User</button>
                 </div> -->
                 <div class="col-md-2 pull-right">
@@ -42,10 +42,10 @@
                         <th scope="col" style="font-weight: bolder;"></th>
                         <th scope="col" style="font-weight: bolder;">Name</th>
                         <th scope="col" style="font-weight: bolder;">Email</th>
-                        <!-- <th scope="col" style="font-weight: bolder;">College</th>
-                        <th scope="col" style="font-weight: bolder;">Course</th>
+                        <th scope="col" style="font-weight: bolder;">College</th>
+                        <!-- <th scope="col" style="font-weight: bolder;">Course</th>
                         <th scope="col" style="font-weight: bolder;">Year & Section</th> -->
-                        <!-- <th scope="col" style="font-weight: bolder;">Role</th> -->
+                        <th scope="col" style="font-weight: bolder;">Role</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -57,14 +57,14 @@
                                 </div>
                             </div>
                         </td>
-                        <td style="vertical-align: middle;">
+                        <td style="vertical-align: middle; text-transform: capitalize;">
                             {{ result.name }}
                         </td>
                         <td style="vertical-align: middle;"> {{ result.email }}</td>
-                        <!-- <td style="vertical-align: middle;"> {{ result.college }}</td>
-                        <td style="vertical-align: middle;"> {{ result.course }}</td>
+                        <td style="vertical-align: middle;"> {{ result.college }}</td>
+                        <!-- <td style="vertical-align: middle;"> {{ result.course }}</td>
                         <td style="vertical-align: middle;"> {{ result.year_level }} - {{ result.section }}</td> -->
-                        <!-- <td style="vertical-align: middle;">
+                        <td style="vertical-align: middle;">
                             <button class="btn btn-info btn-xs btn-fill" v-if="result.role === 'ADMIN'">
                                 Admin
                             </button>
@@ -74,8 +74,8 @@
                             <button class="btn btn-warning btn-xs btn-fill" v-if="result.role === 'CLIENT'">
                                 Student
                             </button>
-                        </td> -->
-                        <td style="vertical-align: middle;">
+                        </td>
+                        <!-- <td style="vertical-align: middle;">
                             <div class="flex-center">
                                 <div class="col-md-6">
                                     <button type="button" class="btn btn-outline-success mr-2" @click="view(result.id)">
@@ -89,7 +89,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </td>
+                        </td> -->
                     </tr>
                     </tbody>
                 </table>
@@ -108,7 +108,7 @@
 
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Confirm Archive</h4>
+                            <h4 class="modal-title">Confirm Delete</h4>
                         </div>
 
                         <!-- Modal body -->
@@ -120,7 +120,7 @@
                                 <strong>Warning!</strong> Oops, something went wrong. Please try again later.
                             </div>
                             <span v-if="!apiResponse.show">
-                                Are you sure to archive {{ toDelete.name }} ({{ toDelete.role }})?
+                                Are you sure to delete {{ toDelete.name }} ({{ toDelete.role }})?
                             </span>
                         </div>
 
@@ -168,7 +168,7 @@
             <div class="row mb-4">
                 <div class="col-md-6 mb-2">
                     <img class="twoByTwoPic float-right" :src="profile.image" alt="no saved image"
-                         style="max-height: 200px; max-width: 200px; margin-bottom: 10px; border-radius: 50%;"
+                         style="max-height: 200px; max-width: 200px; margin-bottom: 10px; border-radius: 50%; clip-path: circle();"
                          v-if="hasPicture">
                     <div class="form-group">
                         <label for="name">Image: </label>
@@ -234,6 +234,7 @@
                         <label for="college">College: </label>
                         <div class="select">
                             <select class="form-control form-select" id="college" v-model="profile.college">
+                                <option value="" selected disabled>SELECT COLLEGE</option>
                                 <option value="UNIVERSITY SCIENCE HIGH SCHOOL">UNIVERSITY SCIENCE HIGH SCHOOL</option>
                                 <option value="AGRICULTURAL SCIENCE AND TECHNOLOGY SCHOOL">AGRICULTURAL SCIENCE AND TECHNOLOGY SCHOOL</option>
                                 <option value="COLLEGE OF AGRICULTURE">COLLEGE OF AGRICULTURE</option>
@@ -245,6 +246,7 @@
                                 <option value="COLLEGE OF HOME SCIENCE AND INDUSTRY">COLLEGE OF HOME SCIENCE AND INDUSTRY</option>
                                 <option value="COLLEGE OF VETERINARY SCIENCE AND MEDICINE">COLLEGE OF VETERINARY SCIENCE AND MEDICINE</option>
                                 <option value="COLLEGE OF SCIENCE">COLLEGE OF SCIENCE</option>
+                                <option value="GRADUATE STUDIES">GRADUATE STUDIES</option>
                             </select>
                             <span class="focus"></span>
                         </div>
@@ -267,7 +269,15 @@
                 <div class="col-md-3 mb-2">
                     <div class="form-group">
                         <label for="year-level">Year Level: </label>
-                        <input class="form-control" id="year-level" type="text" v-model="profile.year_level">
+                        <select class="form-control form-select" id="year-level" v-model="profile.year_level">
+                            <option value="" selected disabled>SELECT YEAR</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-3 mb-2">
@@ -311,7 +321,7 @@ export default {
             searchData: {
                 name: '',
                 email: '',
-                role: 'ADMIN'
+                role: ''
             },
             results: [],
             profile: {

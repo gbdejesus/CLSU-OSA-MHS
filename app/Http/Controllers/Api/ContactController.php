@@ -50,6 +50,7 @@ class ContactController extends Controller
             $contact->lastMessageTime = false;
             if ($lastMessage) {
                 $contact->lastMessage = $this->formatMessage($lastMessage->toArray(), $contact->name);
+                $contact->lastMessage->content = $this->trimLastMessage($contact->lastMessage->content, 30);
                 $contact->lastMessageTime = $lastMessage->created_at;
             }
 
@@ -77,6 +78,34 @@ class ContactController extends Controller
         return Message::where('from', $from)->where('to', $to)->latest()->first();
     }
 
+    /**
+     * @param $text
+     * @param $maxChar
+     * @param string $end
+     * @return string
+     */
+    public function trimLastMessage($text, $maxChar, string $end = '...'): string
+    {
+        if (strlen($text) > $maxChar || $text == '') {
+            $words = preg_split('/\s/', $text);
+            $output = '';
+            $i = 0;
+            while (1) {
+                $length = strlen($output) + strlen($words[$i]);
+                if ($length > $maxChar) {
+                    break;
+                } else {
+                    $output .= " " . $words[$i];
+                    ++$i;
+                }
+            }
+            $output .= $end;
+        } else {
+            $output = $text;
+        }
+        return $output;
+    }
+
     public function formatMessage($message, $username)
     {
         $msg = [];
@@ -84,7 +113,7 @@ class ContactController extends Controller
         $msg['content'] = $message['text'];
         $msg['senderId'] = $message['from'];
 //        $msg['username'] = $username;
-        $msg['timestamp'] = date('h:i:s a', strtotime($message['created_at']));
+        $msg['timestamp'] = date('h:i a', strtotime($message['created_at']));
         $msg['saved'] = true;
         $msg['distributed'] = false;
         $msg['seen'] = $message['read'];
@@ -127,7 +156,7 @@ class ContactController extends Controller
                 $msg->_id = $msg->id;
                 $msg->content = $msg->text;
                 $msg->senderId = (string) $msg->from;
-                $msg->timestamp = $msg->created_at->format('h:i:s A');
+                $msg->timestamp = $msg->created_at->format('M j, Y    h:i A');
                 $msg->username = $sender->name;
                 $msg->avatar = $sender->profile_image;
                 $msg->seen = $msg->read;

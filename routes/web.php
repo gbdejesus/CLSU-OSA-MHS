@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::get('/courses/{collegeId}', 'CourseController@getCourses');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,6 +26,9 @@ Route::get('/counsellors/guest', 'Auth\LoginController@counsellors');
 Route::get('/faq/guest', 'Auth\LoginController@faq');
 Route::get('/counsellors', 'CounsellorsController@index');
 Route::get('/faq', 'FAQController@index');
+// Route::get('/courses/{collegeId}', 'CourseController@getCourses');
+Route::get('/colleges', 'CollegeController@index');
+// Route::post('/register', 'Auth\RegisterController@register')->name('register');
 
 // Routes for Admin
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
@@ -37,6 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/counsellor', 'Admin\CounsellorController@index');
     Route::get('/student', 'Admin\StudentController@index');
     Route::get('/admins', 'Admin\AdminsController@index');
+    Route::get('/archive', 'Admin\ArchiveController@index');
 
 
     Route::get('/client', 'Admin\UserController@clientIndex');

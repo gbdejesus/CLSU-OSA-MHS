@@ -62,21 +62,21 @@ return [
             'actions' => [
                 'view' => 'admin/user',
             ],
-            'icon' => 'ti-user'
+            'icon' => 'ti-plus'
         ],
         'admins' => [
             'name' => 'Admin Management',
             'actions' => [
                 'view' => 'admin/admins',
             ],
-            'icon' => 'ti-user'
+            'icon' => 'ti-desktop'
         ],
         'counsellor' => [
             'name' => 'Counsellor Management',
             'actions' => [
                 'view' => 'admin/counsellor',
             ],
-            'icon' => 'ti-user'
+            'icon' => 'ti-id-badge'
         ],
         'student' => [
             'name' => 'Student Management',
@@ -84,6 +84,13 @@ return [
                 'view' => 'admin/student',
             ],
             'icon' => 'ti-user'
+        ],
+        'archive' => [
+            'name' => 'Archive Management',
+            'actions' => [
+                'view' => 'admin/archive',
+            ],
+            'icon' => 'ti-archive'
         ],
     ],
 
