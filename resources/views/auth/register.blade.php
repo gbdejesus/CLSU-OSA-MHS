@@ -42,7 +42,7 @@
 
                                 <!--NAME-->
                                 <div class="form-group row mt-4">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('FULL NAME *') }}</label>
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('FULL NAME ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-8">
                                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="First name M.I. Last Name" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -57,7 +57,7 @@
 
                                 <!--EMAIL-->
                                 <div class="form-group row mt-2">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('EMAIL ADDRESS *') }}</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('EMAIL ADDRESS ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-8">
                                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your clsu2 email address" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -72,7 +72,7 @@
 
                                 <!--PASSWORD-->
                                 <div class="form-group row mt-2">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('PASSWORD *') }}</label>
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('PASSWORD ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-8">
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter your password" name="password" required autocomplete="new-password">
@@ -87,7 +87,7 @@
 
                                 <!--CONFIRM PASSWORD-->
                                 <div class="form-group row mt-2">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('CONFIRM PASSWORD *') }}</label>
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('CONFIRM PASSWORD ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-8">
                                         <input id="password-confirm" type="password" class="form-control" placeholder="Confirm password" name="password_confirmation" required autocomplete="new-password">
@@ -100,7 +100,7 @@
 
                                 <!--IMAGE-->
                                 <div class="form-group row mt-4" >
-                                    <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('2x2 PICTURE *') }}</label>
+                                    <label for="avatar" class="col-md-4 col-form-label text-md-right">{{ __('2x2 PICTURE ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <input id="avatar" type="file" class="form-control
@@ -116,7 +116,7 @@
 
                                 <!--PHONE-->
                                 <div class="form-group row mt-2" >
-                                    <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('PHONE NUMBER *') }}</label>
+                                    <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('PHONE NUMBER ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter your phone number" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
@@ -136,7 +136,7 @@
                             <div class="col-md-6">
                                 <!--COLLEGE-->
                                 <div class="form-group row mt-2">
-                                    <label for="student-id" class="col-md-4 col-form-label text-md-right">{{ __('COLLEGE *') }}</label>
+                                    <label for="student-id" class="col-md-4 col-form-label text-md-right">{{ __('COLLEGE ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-8">
                                     <!-- <label for="college">College</label> -->
@@ -175,7 +175,7 @@
 
                                 <!--STUDENT ID-->
                                 <div class="form-group row mt-2">
-                                    <label for="student-id" class="col-md-4 col-form-label text-md-right">{{ __('STUDENT ID *') }}</label>
+                                    <label for="student-id" class="col-md-4 col-form-label text-md-right">{{ __('STUDENT ID ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-8">
                                         <input id="student_id" type="text" class="form-control @error('student_id') is-invalid @enderror" placeholder="xx-xxxx" name="student_id" value="{{ old('student_id') }}" required autocomplete="student_id">
@@ -255,7 +255,7 @@
 
                                 <!--YEAR LEVEL-->
                                 <div class="form-group row mt-2" >
-                                    <label for="year-level" class="col-md-4 col-form-label text-md-right" >{{ __('YEAR LEVEL *') }}</label>
+                                    <label for="year-level" class="col-md-4 col-form-label text-md-right" >{{ __('YEAR LEVEL ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <select id="year_level" class="form-control @error('year-level') is-invalid @enderror" name="year_level" value="{{ old('year_level') }}" required autocomplete="year_level">
@@ -276,7 +276,7 @@
                                 </div>
                                 <!--SECTION-->
                                 <div class="form-group row mt-2" >
-                                    <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('SECTION *') }}</label>
+                                    <label for="section" class="col-md-4 col-form-label text-md-right">{{ __('SECTION ') }}<span class="text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <select id="section" class="form-control @error('section') is-invalid @enderror" name="section" value="{{ old('section') }}" required autocomplete="section">
@@ -493,11 +493,43 @@ function fetchCourses() {
     else if (collegeValue === 'Graduate Studies') {
         // If "College of Engineering" is selected, add the corresponding course options
         var engineeringCourses = {
-            'MA': 'Masters in',
-            'MB': 'Masters in',
-            'MC': 'Masters in',
-            'MD': 'Masters in',
-            'DE': 'Doctor in',
+            'MSAgEcon': 'Master of Science in Agricultural Economics',
+            'MSAgEn': 'Master of Science in Agricultural Engineering',
+            'MSAnSci': 'Master of Science in Animal Science',
+            'MSAqua': 'Master of Science in Aquaculture',
+            'MSBio': 'Master of Science in Biology',
+            'MSBEd': 'Master of Science in Biology Education',
+            'MSCEd': 'Master of Science in Chemistry Education',
+            'MSCP': 'Master of Science in Crop Protection',
+            'MSCS': 'Master of Science in Crop Science',
+            'MSDC': 'Master of Science in Development Communication',
+            'MSEd': 'Master of Science in Education',
+            'MSEM': 'Master of Science in Environmental Management',
+            'MSGS': 'Master of Science in Grain Science',
+            'MSGC': 'Master of Science in Guidance and Counselling',
+            'MSRD': 'Master of Science in Rural Development',
+            'MSSS': 'Master of Science in Soil Science',
+            'MALL': 'Master of Arts in Language and Literature',
+            'MSRES': 'Master of Science in Renewable Energy Systems (DOTUni)',
+            'MVS': 'Master of Veterinary Studies',
+            'MAM': 'Master in Agribusiness Management',
+            'MBio': 'Master in Biology',
+            'MChem': 'Master in Chemistry',
+            'MEM': 'Master in Environmental Management (DOTUni)',
+            'MLGM': 'Master in Local Government Management (DOTUni)',
+            'DPAgEng': 'Doctor of Philosophy in Agricultural Engineering',
+            'DPAgEnto': 'Doctor of Philosophy in Agricultural Entomology',
+            'DPAnSci': 'Doctor of Philosophy in Animal Science',
+            'DPAqua': 'Doctor of Philosophy in Aquaculture',
+            'DPBio': 'Doctor of Philosophy in Biology',
+            'DPCS': 'Doctor of Philosophy in Crop Science',
+            'DPDC': 'Doctor of Philosophy in Development Communication',
+            'DPDEd': 'Doctor of Philosophy in Development Education',
+            'DPEM': 'Doctor of Philosophy in Environmental Management',
+            'DPPB': 'Doctor of Philosophy in Plant Breeding',
+            'DPRD': 'Doctor of Philosophy in Rural Development',
+            'DPSS': 'Doctor of Philosophy in Soil Science',
+            'DPSFS': 'Doctor of Philosophy in Sustainable Food Systems by Research Program (DOTUni)',
         };
 
         for (var course in engineeringCourses) {

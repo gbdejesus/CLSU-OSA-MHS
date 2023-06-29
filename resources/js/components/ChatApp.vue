@@ -6,7 +6,7 @@
                     <span v-if="(user.role !== 'ADMIN' && user.evaluated === 1) && user.clients !== null">MANAGEMENT</span>
                     <span v-else-if="user.role === 'CLIENT'">
                         <div v-if="user.evaluated === 1">
-                            <span v-if="user.counselors === null">PICK YOUR COUNSELORS</span>
+                            <span v-if="user.counselors === null">CHOOSE THE COUNSELOR YOU PREFER</span>
                             <span v-else>CONVERSATIONS</span>
                         </div>
                         <div v-else>
